@@ -8,7 +8,7 @@ func main() {
 
 	go func() {
 		for {
-			j, more := <-jobs
+			j, more := <-jobs // more用来反应jobs是否关闭，如果关闭的话则返回false
 			if more {
 				fmt.Println("received job", j)
 			} else {
@@ -23,6 +23,7 @@ func main() {
 		jobs <- j
 		fmt.Println("sent job", j)
 	}
+
 	close(jobs)
 	fmt.Println("sent all jobs")
 
